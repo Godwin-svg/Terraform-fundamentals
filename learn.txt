@@ -1,0 +1,19 @@
+# 0.0.0.0/0
+This does not mean “any IP in the subnet.”
+Instead, it means “any IPv4 address in the world, no matter where it is.”
+In routing terms, it’s a default route — if the destination 
+IP doesn’t match a more specific rule, send it this way.
+
+🔹 Public Subnet vs. Internet
+
+A public subnet in AWS is just a subnet that has a route to the internet gateway.
+
+By adding 0.0.0.0/0 → internet_gateway, you’re saying:
+“Anything trying to leave my VPC, to any IP on the internet, should go through the internet gateway.”
+
+🔹 Example
+Suppose you have an EC2 instance in a public subnet.
+If that EC2 tries to connect to:
+8.8.8.8 (Google DNS) → matches 0.0.0.0/0, goes out to internet via IGW.
+142.250.190.78 (Google.com) → also matches, goes out to internet via IGW.
+So, the route applies to any IP on the internet, not just inside your subnet.
